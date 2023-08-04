@@ -110,7 +110,7 @@ class Categorical__Crossentropy(Loss):
         return loss
 
 
-tf.keras.losses.CategoricalCrossentropy
+
 model = tf.keras.Model(inputs=inputs,outputs=outputs)
 # tf.keras.utils.plot_model(model,to_file="model.png",show_shapes=True,show_layer_activations=True)
 model.compile(optimizer='sgd',loss=Categorical__Crossentropy(),metrics=['accuracy'])

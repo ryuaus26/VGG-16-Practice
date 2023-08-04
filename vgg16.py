@@ -10,6 +10,8 @@ from keras.layers import Dense
 from keras.layers import Flatten
 from keras.losses import Loss
 import keras.backend as K
+from keras.callbacks import ModelCheckpoint
+import os
 
 batch_size=256
 EPOCHS=100
@@ -109,7 +111,9 @@ class Categorical__Crossentropy(Loss):
         
         return loss
 
-
+checkpoint_folder = "Checkpoint"
+os.makedirs(checkpoint_folder,exist_ok=True)
+modelcheckpoint = ModelCheckpoint(filepath=checkpoint_folder,monitor='val_loss',save_best_only=True,save_freq='epoch',)
 
 model = tf.keras.Model(inputs=inputs,outputs=outputs)
 # tf.keras.utils.plot_model(model,to_file="model.png",show_shapes=True,show_layer_activations=True)

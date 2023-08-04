@@ -8,6 +8,7 @@ from keras.layers import Layer
 from keras.layers import MaxPool2D
 from keras.layers import Dense
 from keras.layers import Flatten
+from keras.losses import Loss
 
 batch_size=256
 EPOCHS=100
@@ -86,7 +87,7 @@ x = Conv2D(filters=3,kernel_size=(512,512),strides=(1,1),padding="same",name="Co
 x = Conv2D(filters=3,kernel_size=(512,512),strides=(1,1),padding="same",name="Conv13",activation='relu')(x)
 x = MaxPool2D(pool_size=(2,2),strides=(2,2),padding="same",name="Maxpool5")(x)
 
-print(x.shape)
+
 x = Flatten(name="flatten")(x)
 x = CustomDenseLayer(units=4096,activation='relu')(x)
 x = CustomDenseLayer(units=4096,activation='relu')(x)
@@ -94,10 +95,15 @@ x = CustomDenseLayer(units=56,activation='relu')(x)
 outputs = tf.keras.layers.Softmax(axis=-1)(x)
 
 
+class Categorical__Crossentropy(Loss):
+    def __init__(self):
+        
+
+
+
 model = tf.keras.Model(inputs=inputs,outputs=outputs)
 # tf.keras.utils.plot_model(model,to_file="model.png",show_shapes=True,show_layer_activations=True)
-model.compile(optimizer='sgd',loss=,metrics=['accuracy'])
-
-
+model.compile(optimizer='sgd',loss='categorical_crossentropy',metrics=['accuracy'])
+model.fit(train_generator,batch_size=batch_size,epochs=EPOCHS,validation_data=(val_generator),validation_batch_size=batch_size,)
 
 

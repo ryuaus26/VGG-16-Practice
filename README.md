@@ -17,4 +17,7 @@ Karen Simonyan
 
 """
 
+Formula for Categorical Crossentropy Loss 
 
+
+<img width="566" alt="CEL" src="https://github.com/ryuaus26/VGG-16-Practice/assets/88960218/a6ae1e0a-84b5-4188-af07-03115317fe83">

@@ -104,13 +104,13 @@ class Categorical__Crossentropy(Loss):
     def call(self,y_true,y_pred):
 
         epsilon  = 1e-15
-        y_pred = tf.maximum(y_pred,epsilon)
-        loss = -K.sum(y_true * K.log(y_pred)) 
+        y_pred = tf.clip_by_value(y_pred, epsilon, 1.0 - epsilon)
+        loss = (-tf.reduce_sum(y_true * tf.math.log(y_pred),axis=-1))
         
         return loss
 
 
-
+tf.keras.losses.CategoricalCrossentropy
 model = tf.keras.Model(inputs=inputs,outputs=outputs)
 # tf.keras.utils.plot_model(model,to_file="model.png",show_shapes=True,show_layer_activations=True)
 model.compile(optimizer='sgd',loss=Categorical__Crossentropy(),metrics=['accuracy'])

@@ -115,5 +115,5 @@ model = tf.keras.Model(inputs=inputs,outputs=outputs)
 # tf.keras.utils.plot_model(model,to_file="model.png",show_shapes=True,show_layer_activations=True)
 model.compile(optimizer='sgd',loss=Categorical__Crossentropy(),metrics=['accuracy'])
 model.fit(train_generator,batch_size=batch_size,epochs=EPOCHS,validation_data=(val_generator),validation_batch_size=batch_size)
-
+model.save("model.h5")
 

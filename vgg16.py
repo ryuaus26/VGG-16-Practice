@@ -98,15 +98,13 @@ outputs = tf.keras.layers.Softmax(axis=-1)(x)
 
 class Categorical__Crossentropy(Loss):
     def __init__(self):
-        pass
+        super().__init__()
 
     def call(self,y_true,y_pred):
-        if(y_true.shape != y_pred.shape):
-            raise ValueError("The shape of y_true and y_pred have to be same!")
-        
+
         epsilon  = 1e-15
-        y_pred = max(y_pred,epsilon)
-        loss = -K.sum(y_true * K.log(y_pred)) / y_true.shape[0]
+        y_pred = tf.maximum(y_pred,epsilon)
+        loss = -K.sum(y_true * K.log(y_pred)) 
         
         return loss
 
@@ -115,6 +113,6 @@ class Categorical__Crossentropy(Loss):
 model = tf.keras.Model(inputs=inputs,outputs=outputs)
 # tf.keras.utils.plot_model(model,to_file="model.png",show_shapes=True,show_layer_activations=True)
 model.compile(optimizer='sgd',loss=Categorical__Crossentropy(),metrics=['accuracy'])
-model.fit(train_generator,batch_size=batch_size,epochs=EPOCHS,validation_data=(val_generator),validation_batch_size=batch_size,)
+model.fit(train_generator,batch_size=batch_size,epochs=EPOCHS,validation_data=(val_generator),validation_batch_size=batch_size)
 
 

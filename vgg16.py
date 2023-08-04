@@ -98,6 +98,7 @@ outputs = tf.keras.layers.Softmax(axis=-1)(x)
 
 class Categorical__Crossentropy(Loss):
     def __init__(self):
+        #A constructor to derive the benefits of the parent class "Loss"
         super().__init__()
 
     def call(self,y_true,y_pred):
